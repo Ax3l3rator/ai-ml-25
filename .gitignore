@@ -1,0 +1,14 @@
+.venv
+.virtual_documents
+.ipynb_checkpoints
+
+**/**
+!HW1_koledaev.ipynb
+!model_artifacts.pkl
+!cars_train.csv
+!requirements.txt
+!train_profile.html
+!.gitignore
+!app.py
+!README.md
+!best_model.pkl
