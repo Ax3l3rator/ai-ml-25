@@ -172,7 +172,9 @@ elif page == "Ручной ввод":
         owner = st.selectbox("Тип владельца", sorted(df_eda["owner"].unique()))
         seats = st.selectbox("Количество мест", sorted(df_eda["seats"].unique()))
         name = st.text_input("Название")
-
+        if name == "":
+            st.error("Поле 'Название' должно быть заполнено")
+            st.focus(name)
     if st.button("Предсказать цену"):
         row = {
             "year": year,
