@@ -172,29 +172,30 @@ elif page == "Ручной ввод":
         owner = st.selectbox("Тип владельца", sorted(df_eda["owner"].unique()))
         seats = st.selectbox("Количество мест", sorted(df_eda["seats"].unique()))
         name = st.text_input("Название")
+
+    if st.button("Предсказать цену"):
         if name == "":
             st.error("Поле 'Название' должно быть заполнено")
-            st.focus(name)
-    if st.button("Предсказать цену"):
-        row = {
-            "year": year,
-            "km_driven": km_driven,
-            "mileage": mileage,
-            "engine": engine,
-            "max_power": max_power,
-            "fuel": fuel,
-            "seller_type": seller_type,
-            "transmission": transmission,
-            "owner": owner,
-            "seats": int(seats),
-            "name": name,
-        }
+        else:
+            row = {
+                "year": year,
+                "km_driven": km_driven,
+                "mileage": mileage,
+                "engine": engine,
+                "max_power": max_power,
+                "fuel": fuel,
+                "seller_type": seller_type,
+                "transmission": transmission,
+                "owner": owner,
+                "seats": int(seats),
+                "name": name,
+            }
 
-        df_one = pd.DataFrame([row])
+            df_one = pd.DataFrame([row])
 
-        try:
-            final = prep_data(df_one, artifacts)
-            pred = model.predict(final)[0]
-            st.success("Прогнозируемая цена: " + f"{pred:,.0f}".replace(",", "'"))
-        except Exception as e:
-            st.error(f"Ошибка при подготовке признаков или предсказании: {e}")
+            try:
+                final = prep_data(df_one, artifacts)
+                pred = model.predict(final)[0]
+                st.success("Прогнозируемая цена: " + f"{pred:,.0f}".replace(",", "'"))
+            except Exception as e:
+                st.error(f"Ошибка при подготовке признаков или предсказании: {e}")
