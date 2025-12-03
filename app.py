@@ -171,7 +171,7 @@ elif page == "Ручной ввод":
         transmission = st.selectbox("Коробка передач", sorted(df_eda["transmission"].unique()))
         owner = st.selectbox("Тип владельца", sorted(df_eda["owner"].unique()))
         seats = st.selectbox("Количество мест", sorted(df_eda["seats"].unique()))
-        brand = st.selectbox("Бренд", sorted(df_eda["brand"].unique()))
+        name = st.text_input("Название")
 
     if st.button("Предсказать цену"):
         row = {
@@ -185,7 +185,7 @@ elif page == "Ручной ввод":
             "transmission": transmission,
             "owner": owner,
             "seats": int(seats),
-            "brand": brand,
+            "name": name,
         }
 
         df_one = pd.DataFrame([row])
