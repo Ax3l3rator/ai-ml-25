@@ -117,8 +117,8 @@ elif page == "Прогноз по CSV":
         st.write("Первые строки загруженного датасета:")
         st.dataframe(df_new.head())
         try:
-            X_new = prep_data(df_new, artifacts)
-            preds = model.predict(X_new)
+            new_prep = prep_data(df_new, artifacts)
+            preds = model.predict(new_prep)
             df_result = df_new.copy()
             df_result["pred_selling_price"] = preds
             st.subheader("Результаты прогноза")
@@ -191,8 +191,8 @@ elif page == "Ручной ввод":
         df_one = pd.DataFrame([row])
 
         try:
-            X_one, _ = prep_data(df_one, artifacts)
-            pred = model.predict(X_one)[0]
+            final = prep_data(df_one, artifacts)
+            pred = model.predict(final)[0]
             st.success("Прогнозируемая цена: " + f"{pred:,.0f}".replace(",", "'"))
         except Exception as e:
             st.error(f"Ошибка при подготовке признаков или предсказании: {e}")
